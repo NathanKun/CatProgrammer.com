@@ -1,0 +1,43 @@
+header {
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    margin: 5px auto;
+    padding: 10px;
+    font: bold 20px arial;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7 {
+    text-align: center;
+    margin: 5px auto;
+}
+
+footer {
+    text-align: center;
+    padding: 2px;
+    margin: 50px auto auto 20px;
+}
+
+body {
+    padding: 0 2em;
+    font-family: Arial, sans-serif;
+    color: #024457;
+    background: #f2f2f2;
+}
+
+h1 {
+    font-family: Verdana;
+    font-weight: normal;
+    color: #024457;
+    margin: 5px auto;
+}
+
+h1 span {
+    color: #167F92;
+}

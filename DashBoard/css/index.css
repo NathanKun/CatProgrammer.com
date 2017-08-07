@@ -1,0 +1,22 @@
+canvas {
+	display: inline-block;
+	//float: left;
+	max-width: 75%;
+	margin: auto;
+}
+
+#list {
+	display: inline-block;
+	//float: left;
+	//max-width: 30%;
+	//margin: auto;
+}
+
+footer {
+	display: block;
+}
+
+#disconnect {
+	display: block;
+	clear: both;
+}
