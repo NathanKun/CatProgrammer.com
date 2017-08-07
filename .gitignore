@@ -4,6 +4,7 @@ OnlineBanking/
 squirrelmail/
 squirrelmailData/
 stockchooser/
-CatProgrammer.com
+.well-known/
 
 includes/param.inc.php
+user.ini
