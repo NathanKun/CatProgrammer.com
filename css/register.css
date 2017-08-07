@@ -1,0 +1,53 @@
+body>header {
+    text-align: center;
+    padding: 2px;
+    margin: 2px;
+}
+
+section {
+    display: block;
+    padding: 3px;
+    margin: 10px;
+    text-align: center;
+    vertical-align: text-top;
+}
+
+#hint {
+    color: red;
+    display: block;
+}
+
+.input>label {
+    display: block;
+    padding: 3px;
+    margin: 10px;
+}
+
+.input>input {
+    display: block;
+    padding: 3px;
+    margin: 10px;
+    width: 15em;
+}
+
+.input {
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.button {
+    display: inline-block;
+    padding: 3px;
+    vertical-align: bottom;
+    margin-bottom: .5em;
+}
+
+.link {
+    padding: 3px;
+}
+
+footer {
+    text-align: center;
+    padding: 2px;
+    margin: 2px
+}
