@@ -9,16 +9,17 @@
         // logged in
     } else {
         session_destroy();
-        echo "<h3>Vous ne vous êtes pas encore identifié.</h3>";
-        echo "<p><a href='https://catprogrammer.com'>Return to index</a></p>";
+        echo "<h3>请登录。</h3>";
         include "footer.inc.php";
+        header("refresh:1;url=//".$_SERVER['HTTP_HOST']);
         die();
     }
 
     if(isset($_SESSION["lastActivity"]) && (time() - $_SESSION["lastActivity"] > 60 * $lifeTimeInMin)) {
         session_destroy();
-        echo "<p><a href=\"./index.php\">Retourner à la page d'acceuil</a></p>";
-        die("Votre session est expédié.");
+        echo "<h3>登录已过期</h3>";
+        include "footer.inc.php";
+        header("refresh:1;url=//".$_SERVER['HTTP_HOST']);
     } else{
         $_SESSION["lastActivity"] = time();
         session_regenerate_id(true);

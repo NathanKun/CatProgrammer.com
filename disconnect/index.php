@@ -26,7 +26,7 @@
         echo "<h3>这里是退出登录页。</h3>";
     }
     echo "<p><a href=\"../\">返回主页</a></p>";
-    header("refresh:2; url=..");
+        header("refresh:2;url=//".$_SERVER['HTTP_HOST']);
     
     include "./includes/footer.inc.php" ;
     ?>
