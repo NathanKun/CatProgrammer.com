@@ -1,17 +1,26 @@
 <?php
+require_once "../config.php";
+require_once (ROOT_DIR.'/includes/param.inc.php');
 
-$host = '127.0.0.1';
-$user = 'catprogrammer';
-$pw = 'catcatcat';
-$db = 'catprogrammer';
+$header = null;
+$data = null;
+$sql = null;
 
-$conn = new mysqli($host, $user, $pw, $db);
+$conn = new mysqli($host, $user, $dbpw, $db);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
     echo "Connection failed: $conn";
 } else {
-    $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum";
+    if (isset($_GET['all'])) {
+        $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum";
+    }else{
+        $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM (
+                    SELECT * FROM temphum 
+                    ORDER BY dateandtime DESC LIMIT 1000) as latest
+                ORDER BY dateandtime ASC;";
+    }
+    
     //echo $sql;
     $result = $conn->query($sql);
     $conn->close();
