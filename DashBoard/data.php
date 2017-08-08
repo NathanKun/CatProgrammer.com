@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     echo "Connection failed: $conn";
 } else {
     if (isset($_GET['all'])) {
-        $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum";
+        $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum;";
     }else{
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM (
                     SELECT * FROM temphum 
