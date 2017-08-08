@@ -15,7 +15,6 @@
 <body>
     <?php
     include "../includes/header.inc.php";
-    include "../path.php";
     session_start();
     
     if(isset($_SESSION["usr_id"])){
@@ -28,7 +27,7 @@
     echo "<p><a href=\"../\">返回主页</a></p>";
         header("refresh:2;url=//".$_SERVER['HTTP_HOST']);
     
-    include "./includes/footer.inc.php" ;
+    include "../includes/footer.inc.php" ;
     ?>
 </body>
 

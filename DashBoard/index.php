@@ -24,7 +24,8 @@
         <canvas id="tempHumChart"></canvas>
         <div id='list'></div>
     </div>
-    <a id='disconnect' href='../disconnect'>Disconnect</a>
+    <p><a id='GetAll' href='./?all=true'>Get all</a></p>
+    <p><a id='disconnect' href='../disconnect'>Disconnect</a></p>
     <?php include (ROOT_DIR.'/includes/footer.inc.php'); ?>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -62,9 +63,8 @@
             window.myChart.render();
         }
 
-        //$.get("https://nathankun.ddns.net/data.csv", { t: new Date().getTime() }, function(result) {
         var url = "";
-        if (getUrlParameter('all') == 'true'){
+        if (getUrlParameter('all') == 'true') {
             //url = "https://catprogrammer.com/DashBoard/data.php?all=true";
             url = "data.php?all=true";
         } else {
@@ -123,14 +123,19 @@
                         }
                     }
                     // add last day data
-                    dateDataList.push({
-                        Date: lastDate,
-                        Time: timeList,
-                        Temperature: tempList,
-                        Humitity: humList
-                    });
+                    if (lastDate.length > 1) {
+                        dateDataList.push({
+                            Date: lastDate,
+                            Time: timeList,
+                            Temperature: tempList,
+                            Humitity: humList
+                        });
+                    } else {
+                        dateList.splice(dateList.length - 1, dateList.length);
+                    }
 
-                    // remove the first, nodata item
+
+                    // remove the first, nodata items
                     dateDataList.splice(0, 1);
 
                     // final list
@@ -138,15 +143,15 @@
                         DateList: dateList,
                         DataList: dateDataList
                     };
-                    
-                    console.log(result.data);
+
+                    //console.log(finalList);
 
                     // generate date list for date selection                
                     var ul = $("<ul id='dateList' class='col_ul'>").appendTo('#list');
                     var counter = 0;
                     var subUl = null;
                     var li = null;
-                    
+
                     // add each 10 date to a subUl, then add the subUl to the main ul
                     $(finalList.DateList).each(function(index, item) {
 
@@ -257,8 +262,8 @@
                 }
             });
         });
-        
-        
+
+
         // https://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js
         function getUrlParameter(sParam) {
             var sPageURL = decodeURIComponent(window.location.search.substring(1)),
