@@ -5,6 +5,7 @@ require_once (ROOT_DIR.'/includes/param.inc.php');
 $header = null;
 $data = null;
 $sql = null;
+$line = null;
 
 $conn = new mysqli($host, $user, $dbpw, $db);
 
@@ -14,6 +15,8 @@ if ($conn->connect_error) {
 } else {
     if (isset($_GET['all'])) {
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum;";
+    }else if (isset($_GET['single'])) {
+        $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum ORDER BY dateandtime DESC LIMIT 1;";
     }else{
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM (
                     SELECT * FROM temphum 
@@ -26,7 +29,23 @@ if ($conn->connect_error) {
     $conn->close();
     if($result->num_rows == 0){
         echo 'failed';
-    } else {
+    } else if (isset($_GET['single'])) {
+        $row = $result->fetch_row();
+        foreach( $row as $value )
+        {                                            
+            if ( ( !isset( $value ) ) || ( $value == "" ) )
+            {
+                $value = ";";
+            }
+            else
+            {
+                $value = str_replace( '"' , '""' , $value );
+                $value = '"' . $value . '"' . ";";
+            }
+            $line .= $value;
+        }
+        echo $line;
+    } else{
         $fields = $result->field_count;       
         for ( $i = 0; $i < $fields; $i++ )
         {
@@ -57,4 +76,3 @@ if ($conn->connect_error) {
     }
 }
 ?>
-
