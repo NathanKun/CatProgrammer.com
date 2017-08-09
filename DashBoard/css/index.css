@@ -1,17 +1,63 @@
-canvas {
-	display: inline-block;
-	//float: left;
-	max-width: 75%;
-	margin: auto;
+:root {
+    --bgBlack: #3c3c3c;
+    --colorA1: #FFC107;
+    --colorA2: #FFEB3B;
+    --colorB1: #2196F3;
+    --colorB2: #03A9F4;
+    --colorC1: #EC407A;
+    --colorC2: #F06292;
+    --colorD1: #7E57C2;
+    --colorD2: #9575CD;
 }
 
-#list {
-	display: inline-block;
-	//float: left;
-	//max-width: 30%;
-	//margin: auto;
+body {
+    background: var(--bgBlack);
 }
 
-footer {
-	display: block;
+.grid-stack {
+    margin: 0 auto;
+}
+
+.grid-stack-item-content {
+    text-align: center;
+}
+
+.content-up {
+    height: 45%
+}
+
+.content-down {
+    height: 55%
+}
+
+.grid-stack-item-A1 {
+    background-color: var(--colorA1);
+}
+
+.grid-stack-item-A2 {
+    background-color: var(--colorA2);
+}
+
+.grid-stack-item-B1 {
+    background-color: var(--colorB1);
+}
+
+.grid-stack-item-B2 {
+    background-color: var(--colorB2);
+}
+
+.grid-stack-item-C1 {
+    background-color: var(--colorC1);
+}
+
+.grid-stack-item-C2 {
+    background-color: var(--colorC2);
+}
+
+.grid-stack-item-D1 {
+    background-color: var(--colorD1);
+}
+
+.grid-stack-item-D2 {
+    background-color: var(--colorD2);
 }
