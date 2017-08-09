@@ -15,8 +15,8 @@
     <meta http-equiv="expires" content="0" />
     <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
     <meta http-equiv="pragma" content="no-cache" />
-    <title>DashBoard</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <title>DashBoard - Chart</title>
+    <link rel="stylesheet" href="css/chart.css">
 </head>
 
 <body>
