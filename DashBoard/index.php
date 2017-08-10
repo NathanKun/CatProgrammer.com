@@ -24,19 +24,23 @@
 
 <body>
     <div class="container-fluid">
-        <h1>Dashboard</h1>
         <!-- Container -->
         <div class="grid-stack" data-gs-width="12" data-gs-height="12">
+            <div class="grid-stack grid-stack-item" data-gs-x="2" data-gs-y="0" data-gs-width="8" data-gs-height="1" data-gs-locked="true" data-gs-no-move="true" data-gs-no-resize="true">
+                <div class="grid-stack-item-content">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
             <!-- Second Container at (2, 0) to have some margin -->
-            <div class="grid-stack grid-stack-item" data-gs-x="2" data-gs-y="0" data-gs-width="8" data-gs-height="10" data-gs-locked="true" data-gs-no-move="true" data-gs-no-resize="true">
+            <div class="grid-stack grid-stack-item" data-gs-x="2" data-gs-y="1" data-gs-width="8" data-gs-height="10" data-gs-locked="true" data-gs-no-move="true" data-gs-no-resize="true">
                 <!-- Temperature -->
                 <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="4">
                     <div class="grid-stack-item-content">
                         <div class="content-up grid-stack-item-A1">
-                            <img class="icon" src="src/temperature%20meter.png" />
+                            <img class="icon" src="src/calendar.png" />
                         </div>
                         <div class="content-down grid-stack-item-A2">
-                            <div id="temp"></div>
+                            <div id="cal"></div>
                         </div>
                     </div>
                 </div>
@@ -44,10 +48,10 @@
                 <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
                     <div class="grid-stack-item-content">
                         <div class="content-up grid-stack-item-B1">
-                            <img class="icon" src="src/humidity%20meter.png" />
+                            <img class="icon" src="src/temperature%20meter.png" />
                         </div>
                         <div class="content-down grid-stack-item-B2">
-                            <div id="humi"></div>
+                            <div id="temp"></div>
                         </div>
                     </div>
                 </div>
@@ -55,10 +59,10 @@
                 <div class="grid-stack-item" data-gs-x="8" data-gs-y="0" data-gs-width="4" data-gs-height="4">
                     <div class="grid-stack-item-content">
                         <div class="content-up grid-stack-item-C1">
-                            <img class="icon" src="src/calendar.png" />
+                            <img class="icon" src="src/humidity%20meter.png" />
                         </div>
                         <div class="content-down grid-stack-item-C2">
-                            <div id="cal"></div>
+                            <div id="humi"></div>
                         </div>
                     </div>
                 </div>
@@ -94,11 +98,31 @@
             }, function(result) {
                 result = result.replace(/"/g, ""); // js replace only replace the first caractor, use g for global
                 var list = result.split(';');
-                $("#temp").wrapInner("<p class='dataP'>" + list[1] + "</p><p class='timeP'>" + list[0] + "</p>");
-                $("#humi").wrapInner("<p class='dataP'>" + list[2] + "</p><p class='timeP'>" + list[0] + "</p>");
+                
                 var dt = new Date($.now());
                 var date = dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDay();
                 var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+                
+                var dtData = new Date();
+                dtData.setFullYear(list[0].substr(0, 4));
+                dtData.setMonth(parseInt(list[0].substr(5, 2)) - 1);
+                dtData.setDate(list[0].substr(8, 2));
+                dtData.setHours(list[0].substr(11, 2));
+                dtData.setMinutes(list[0].substr(14, 2));
+                dtData.setSeconds(list[0].substr(17, 2));
+
+                function msToTime(s) {
+                    s = s / 1000;
+                    var secs = s % 60;
+                    s = (s - secs) / 60;
+                    var mins = s % 60;
+                    var hrs = (s - mins) / 60;
+
+                    return hrs + ' hours ' + mins + ' minutes ' + secs + ' seconds ago';
+                }
+                
+                $("#temp").wrapInner("<p class='dataP'>" + list[1] + "</p><p class='timeP'>" + msToTime(dt - dtData) + "</p>");
+                $("#humi").wrapInner("<p class='dataP'>" + list[2] + "</p><p class='timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#cal").wrapInner("<p>" + date + "</p><p>" + time + "</p>");
             });
         });
