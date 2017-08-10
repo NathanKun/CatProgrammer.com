@@ -32,22 +32,34 @@
                 <!-- Temperature -->
                 <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="4">
                     <div class="grid-stack-item-content">
-                        <div class="content-up grid-stack-item-A1"></div>
-                        <div class="content-down grid-stack-item-A2"></div>
+                        <div class="content-up grid-stack-item-A1">
+                            <img class="icon" src="src/temperature%20meter.png" />
+                        </div>
+                        <div class="content-down grid-stack-item-A2">
+                            <div id="temp"></div>
+                        </div>
                     </div>
                 </div>
                 <!-- Humitity -->
                 <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
                     <div class="grid-stack-item-content">
-                        <div class="content-up grid-stack-item-B1"></div>
-                        <div class="content-down grid-stack-item-B2"></div>
+                        <div class="content-up grid-stack-item-B1">
+                            <img class="icon" src="src/humidity%20meter.png" />
+                        </div>
+                        <div class="content-down grid-stack-item-B2">
+                            <div id="humi"></div>
+                        </div>
                     </div>
                 </div>
                 <!--  -->
                 <div class="grid-stack-item" data-gs-x="8" data-gs-y="0" data-gs-width="4" data-gs-height="4">
                     <div class="grid-stack-item-content">
-                        <div class="content-up grid-stack-item-C1"></div>
-                        <div class="content-down grid-stack-item-C2"></div>
+                        <div class="content-up grid-stack-item-C1">
+                            <img class="icon" src="src/calendar.png" />
+                        </div>
+                        <div class="content-down grid-stack-item-C2">
+                            <div id="cal"></div>
+                        </div>
                     </div>
                 </div>
                 <!--  -->
@@ -76,9 +88,18 @@
                 float: false
             };
             $('.grid-stack').gridstack(options);
-            
-            $.get("data.php", {single:true}, function(result){
-                alert(result);
+
+            $.get("data.php", {
+                single: true
+            }, function(result) {
+                result = result.replace(/"/g, ""); // js replace only replace the first caractor, use g for global
+                var list = result.split(';');
+                $("#temp").wrapInner("<p class='dataP'>" + list[1] + "</p><p class='timeP'>" + list[0] + "</p>");
+                $("#humi").wrapInner("<p class='dataP'>" + list[2] + "</p><p class='timeP'>" + list[0] + "</p>");
+                var dt = new Date($.now());
+                var date = dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDay();
+                var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+                $("#cal").wrapInner("<p>" + date + "</p><p>" + time + "</p>");
             });
         });
 
