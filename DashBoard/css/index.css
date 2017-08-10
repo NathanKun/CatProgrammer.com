@@ -1,7 +1,7 @@
 :root {
     --bgBlack: #3c3c3c;
-    --colorA1: #FFC107;
-    --colorA2: #FFEB3B;
+    --colorA1: #FBC02D;
+    --colorA2: #FDD835;
     --colorB1: #2196F3;
     --colorB2: #03A9F4;
     --colorC1: #EC407A;
@@ -22,12 +22,71 @@ body {
     text-align: center;
 }
 
+.icon {
+    height: 80%;
+    width: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 .content-up {
-    height: 45%
+    height: 45%;
+    position: relative;
+}
+
+#temp,
+#humi {
+    position: relative;
+    top: 10%;
+    color: #f2f2f2;
+}
+
+#cal {
+    position: relative;
+    top: 15%;
+    color: #f2f2f2;
+}
+
+.dataP {
+    font-size: 6vw;
+    margin: 0;
+}
+
+.timeP {
+    font-size: 1.5vw;
+}
+
+#cal>p {
+    font-size: 2.5vw;
+}
+
+@media screen and (min-width: 1200px) {
+    .dataP {
+        font-size: 72px;
+    }
+    .timeP {
+        font-size: 18px;
+    }
+}
+
+.grid-stack.grid-stack-one-column-mode>.grid-stack-item>.grid-stack-item-content>.content-down>div>.dataP {
+    font-size: 8vh!important;
+}
+
+.grid-stack.grid-stack-one-column-mode>.grid-stack-item>.grid-stack-item-content>.content-down>div>.timeP {
+    font-size: 3vh!important;
+}
+
+.grid-stack.grid-stack-one-column-mode>.grid-stack-item>.grid-stack-item-content>.content-down>#cal>p {
+    font-size: 6vh!important;
 }
 
 .content-down {
-    height: 55%
+    height: 55%;
 }
 
 .grid-stack-item-A1 {
