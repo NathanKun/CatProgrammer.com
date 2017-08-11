@@ -16,7 +16,6 @@
     <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
     <meta http-equiv="pragma" content="no-cache" />
     <title>DashBoard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack.min.css" />
     <link rel="stylesheet" href="css/index.css" />
 
@@ -24,53 +23,98 @@
 
 <body>
     <div class="container-fluid">
+        <div>
+            <h1>Dashboard</h1>
+        </div>
         <!-- Container -->
-        <div class="grid-stack" data-gs-width="12" data-gs-height="12">
-            <div class="grid-stack grid-stack-item" data-gs-x="2" data-gs-y="0" data-gs-width="8" data-gs-height="1" data-gs-locked="true" data-gs-no-move="true" data-gs-no-resize="true">
-                <div class="grid-stack-item-content">
-                    <h1>Dashboard</h1>
-                </div>
-            </div>
+        <div class="grid-stack" data-gs-width="12" data-gs-height="10">
             <!-- Second Container at (2, 0) to have some margin -->
-            <div class="grid-stack grid-stack-item" data-gs-x="2" data-gs-y="1" data-gs-width="8" data-gs-height="10" data-gs-locked="true" data-gs-no-move="true" data-gs-no-resize="true">
-                <!-- Temperature -->
-                <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+            <div class="grid-stack grid-stack-item grid-stack-main" data-gs-x="2" data-gs-y="0" data-gs-width="8" data-gs-height="8" data-gs-locked="true" data-gs-no-move="true" data-gs-no-resize="true">
+                <!-- Calendar -->
+                <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">
                     <div class="grid-stack-item-content">
                         <div class="content-up grid-stack-item-A1">
-                            <img class="icon" src="src/calendar.png" />
+                            <img class="icon dataIcon" src="src/calendar.png" />
                         </div>
                         <div class="content-down grid-stack-item-A2">
                             <div id="cal"></div>
                         </div>
                     </div>
                 </div>
-                <!-- Humitity -->
-                <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+                <!-- Temperature -->
+                <div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="2">
                     <div class="grid-stack-item-content">
                         <div class="content-up grid-stack-item-B1">
-                            <img class="icon" src="src/temperature%20meter.png" />
+                            <img class="icon dataIcon" src="src/temperature%20meter.png" />
                         </div>
                         <div class="content-down grid-stack-item-B2">
                             <div id="temp"></div>
                         </div>
                     </div>
                 </div>
-                <!--  -->
-                <div class="grid-stack-item" data-gs-x="8" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+                <!-- Humitity -->
+                <div class="grid-stack-item" data-gs-x="8" data-gs-y="0" data-gs-width="4" data-gs-height="2">
                     <div class="grid-stack-item-content">
                         <div class="content-up grid-stack-item-C1">
-                            <img class="icon" src="src/humidity%20meter.png" />
+                            <img class="icon dataIcon" src="src/humidity%20meter.png" />
                         </div>
                         <div class="content-down grid-stack-item-C2">
                             <div id="humi"></div>
                         </div>
                     </div>
                 </div>
-                <!--  -->
-                <div class="grid-stack-item" data-gs-x="0" data-gs-y="4" data-gs-width="8" data-gs-height="6">
+                <!-- Cat Food -->
+                <div class="grid-stack-item" data-gs-x="0" data-gs-y="2" data-gs-width="4" data-gs-height="2">
                     <div class="grid-stack-item-content">
-                        <div class="content-up grid-stack-item-D1"></div>
-                        <div class="content-down grid-stack-item-D2"></div>
+                        <div class="content-up grid-stack-item-D1">
+                            <img class="icon dataIcon" src="src/catFoodIcon.png" />
+                        </div>
+                        <div class="content-down grid-stack-item-D2">
+                            <div id="food"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cat Water -->
+                <div class="grid-stack-item" data-gs-x="4" data-gs-y="2" data-gs-width="4" data-gs-height="2">
+                    <div class="grid-stack-item-content">
+                        <div class="content-up grid-stack-item-E1">
+                            <img class="icon dataIcon" src="src/catWaterIcon.png" />
+                        </div>
+                        <div class="content-down grid-stack-item-E2">
+                            <div id="water"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Buton chart.php -->
+                <div class="grid-stack-item" data-gs-x="8" data-gs-y="2" data-gs-width="2" data-gs-height="1">
+                    <div class="grid-stack-item-content grid-stack-item-1">
+                        <a href="chart.php" alt="TempHumiChart Page"><img class="icon buttonIcon" src="src/TempHumiChartBtnIcon.png" /></a>
+                    </div>
+                </div>
+                <!-- Buton 2 -->
+                <div class="grid-stack-item" data-gs-x="10" data-gs-y="2" data-gs-width="2" data-gs-height="1">
+                    <div class="grid-stack-item-content grid-stack-item-2">
+                    </div>
+                </div>
+                <!-- Buton 3 -->
+                <div class="grid-stack-item" data-gs-x="8" data-gs-y="3" data-gs-width="2" data-gs-height="1">
+                    <div class="grid-stack-item-content grid-stack-item-3">
+                    </div>
+                </div>
+                <!-- Buton Disconnect.php -->
+                <div class="grid-stack-item" data-gs-x="10" data-gs-y="3" data-gs-width="2" data-gs-height="1">
+                    <div class="grid-stack-item-content grid-stack-item-4">
+                        <a href="../disconnect/" alt="Disconnect"><img class="icon buttonIcon" src="src/disconnect.png" /></a>
+                    </div>
+                </div>
+                <!-- TemHumiChart -->
+                <div class="grid-stack-item" data-gs-x="0" data-gs-y="4" data-gs-width="6" data-gs-height="2">
+                    <div class="grid-stack-item-content grid-stack-item-5">
+                    </div>
+                </div>
+                <!-- FoodWaterChart -->
+                <div class="grid-stack-item" data-gs-x="6" data-gs-y="4" data-gs-width="6" data-gs-height="2">
+                    <div class="grid-stack-item-content grid-stack-item-6">
                     </div>
                 </div>
             </div>
@@ -79,17 +123,18 @@
 
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="js/gridstack.js"></script>
     <script src="js/gridstack.jQueryUI.js"></script>
 
     <script type="text/javascript">
         $(function() {
             var options = {
-                float: false
+                float: false,
+                cellHeight: 'auto'
             };
             $('.grid-stack').gridstack(options);
 
@@ -98,11 +143,11 @@
             }, function(result) {
                 result = result.replace(/"/g, ""); // js replace only replace the first caractor, use g for global
                 var list = result.split(';');
-                
+
                 var dt = new Date($.now());
                 var date = dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDay();
                 var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-                
+
                 var dtData = new Date();
                 dtData.setFullYear(list[0].substr(0, 4));
                 dtData.setMonth(parseInt(list[0].substr(5, 2)) - 1);
@@ -118,9 +163,13 @@
                     var mins = s % 60;
                     var hrs = (s - mins) / 60;
 
-                    return hrs + ' hours ' + mins + ' minutes ' + secs + ' seconds ago';
+                    if (hrs == 0) {
+                        return mins + ' minutes ' + secs + ' seconds ago';
+                    } else {
+                        return hrs + ' hours ' + mins + ' minutes ' + secs + ' seconds ago';
+                    }
                 }
-                
+
                 $("#temp").wrapInner("<p class='dataP'>" + list[1] + "</p><p class='timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#humi").wrapInner("<p class='dataP'>" + list[2] + "</p><p class='timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#cal").wrapInner("<p>" + date + "</p><p>" + time + "</p>");
