@@ -19,14 +19,8 @@ if ($conn->connect_error) {
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum ORDER BY dateandtime DESC LIMIT 1;";
     }else if (isset($_GET['oneday'])) {
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum where (
-                    dateandtime >= (
-                        select date(dateandtime) from temphum order by dateandtime desc limit 1
-                    ) 
-                    and
-                    dateandtime < (
-                        select date(date_add(dateandtime, interval +1 day)) from temphum order by dateandtime desc limit 1
-                    )
-                )";
+                    dateandtime >=  '". date("Y-m-d") . "' and dateandtime < '" . (new DateTime('tomorrow'))->format('Y-m-d') .
+                "');";
     }else{
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM (
                     SELECT * FROM temphum 
@@ -34,7 +28,7 @@ if ($conn->connect_error) {
                 ORDER BY dateandtime ASC;";
     }
     
-    //echo $sql;
+    》》echo $sql;
     $result = $conn->query($sql);
     $conn->close();
     if($result->num_rows == 0){
