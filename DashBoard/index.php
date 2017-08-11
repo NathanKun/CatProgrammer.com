@@ -48,7 +48,7 @@
                             <img class="icon dataIcon" src="src/temperature%20meter.png" />
                         </div>
                         <div class="content-down grid-stack-item-B2">
-                            <div id="temp"></div>
+                            <div id="temp" class="dataDiv"></div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             <img class="icon dataIcon" src="src/humidity%20meter.png" />
                         </div>
                         <div class="content-down grid-stack-item-C2">
-                            <div id="humi"></div>
+                            <div id="humi" class="dataDiv"></div>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                             <img class="icon dataIcon" src="src/catFoodIcon.png" />
                         </div>
                         <div class="content-down grid-stack-item-D2">
-                            <div id="food"></div>
+                            <div id="food" class="dataDiv"></div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                             <img class="icon dataIcon" src="src/catWaterIcon.png" />
                         </div>
                         <div class="content-down grid-stack-item-E2">
-                            <div id="water"></div>
+                            <div id="water" class="dataDiv"></div>
                         </div>
                     </div>
                 </div>
@@ -173,6 +173,10 @@
                 $("#temp").wrapInner("<p class='dataP'>" + list[1] + "</p><p class='timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#humi").wrapInner("<p class='dataP'>" + list[2] + "</p><p class='timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#cal").wrapInner("<p>" + date + "</p><p>" + time + "</p>");
+                
+                
+                $("#food").wrapInner("<p class='dataP'>100%</p><p class='timeP'>1s ago</p>");
+                $("#water").wrapInner("<p class='dataP'>100%</p><p class='timeP'>1s ago</p>");
             });
         });
 

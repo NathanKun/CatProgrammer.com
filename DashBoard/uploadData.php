@@ -1,31 +1,38 @@
 <?php
 
-$dateandtime = ( isset ( $_GET["dt"] ) ) ? trim ( $_GET["dt"] ) : '';;
-$temp = ( isset ( $_GET["t"] ) ) ? trim ( $_GET["t"] ) : '';;
-$hum = ( isset ( $_GET["h"] ) ) ? trim ( $_GET["h"] ) : '';;
+$dateandtime = ( isset ( $_GET["dt"] ) ) ? trim ( $_GET["dt"] ) : '';
+$temp = ( isset ( $_GET["t"] ) ) ? trim ( $_GET["t"] ) : '';
+$hum = ( isset ( $_GET["h"] ) ) ? trim ( $_GET["h"] ) : '';
+$food = ( isset ( $_GET["f"] ) ) ? trim ( $_GET["f"] ) : '';
+$water = ( isset ( $_GET["w"] ) ) ? trim ( $_GET["w"] ) : '';
 
-$host = '127.0.0.1';
-$user = 'userrrrrname';
-$pw = 'passssssword';
-$db = 'databaaaaase';
+require_once "../config.php";
+require_once (ROOT_DIR.'/includes/param.inc.php');
 
-if($dateandtime != '' && $temp != '' && $hum != ''){
-    $conn = new mysqli($host, $user, $pw, $db);
+if($dateandtime != '' && (($temp != '' && $hum != '') || ($food != '' && $water != ''))){
+    $conn = new mysqli($host, $user, $dbpw, $db);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
         echo "Connection failed: $conn";
     } else {
         $dateandtime = $conn->real_escape_string(urldecode($dateandtime));
-        $temp =  $conn->real_escape_string(urldecode($temp));
-        $hum =  $conn->real_escape_string(urldecode($hum));
+        if($temp != '' && $hum != '') {
+            $temp =  $conn->real_escape_string(urldecode($temp));
+            $hum =  $conn->real_escape_string(urldecode($hum));
 
-        $sql = "INSERT INTO temphum VALUES('$dateandtime', '$temp', '$hum')";
+            $sql = "INSERT INTO temphum VALUES('$dateandtime', '$temp', '$hum')";
+        } else {
+            $food =  $conn->real_escape_string(urldecode($food));
+            $water =  $conn->real_escape_string(urldecode($water));
+
+            $sql = "INSERT INTO foodwater VALUES('$dateandtime', '$food', '$water')";
+        }
 	//echo $sql;
         if($conn->query($sql) === true){
             echo 'ok'; 
         } else{
-            //echo $conn->error;
+            echo $conn->error;
             echo 'failed';
         }
         $conn->close();
@@ -34,4 +41,3 @@ if($dateandtime != '' && $temp != '' && $hum != ''){
     echo 'params error';
 }
 ?>
-

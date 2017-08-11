@@ -61,11 +61,9 @@ body {
     height: 70%;
 }
 
-#temp,
-#humi {
+.dataDiv {
     position: relative;
     top: 10%;
-    color: var(--fontWhite);
 }
 
 #cal {
@@ -80,11 +78,13 @@ body {
 .dataP {
     font-size: 4vw;
     margin: 0;
+    color: var(--fontWhite);
 }
 
 .timeP {
     font-size: 1.25vw;
     margin: 0;
+    color: var(--fontWhite);
 }
 
 #cal>p {
