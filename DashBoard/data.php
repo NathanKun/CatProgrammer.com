@@ -28,7 +28,7 @@ if ($conn->connect_error) {
                 ORDER BY dateandtime ASC;";
     }
     
-    》》echo $sql;
+    //echo $sql;
     $result = $conn->query($sql);
     $conn->close();
     if($result->num_rows == 0){
