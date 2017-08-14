@@ -1,3 +1,3 @@
 <footer>
-    <a href="https://catprogrammer.com">catprogrammer.com</a>
+    <a href="/">catprogrammer.com</a>
 </footer>

@@ -1,0 +1,43 @@
+body {
+    background: #EEEEEE;
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        display: block!important;
+    }
+    .col {
+        display: block!important;
+    }
+}
+
+.row {
+    display: flex;
+    /* equal height of the children */
+}
+
+.col {
+    /* additionally, equal width */
+    margin: 1em;
+}
+
+#chartDiv {
+    flex: 5;
+    background: #B3E5FC;
+}
+
+canvas {
+    display: inline-block;
+    margin: auto;
+}
+
+#list {
+    flex: 1;
+    background: #C8E6C9;
+}
+
+footer {
+    display: block;
+    text-align: center;
+    margin: 10px auto auto 20px;
+}

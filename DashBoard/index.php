@@ -21,14 +21,13 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div>
         <div>
             <h1>Dashboard</h1>
         </div>
         <!-- Container -->
-        <div class="grid-stack" data-gs-width="12" data-gs-height="10">
-            <!-- Second Container at (2, 0) to have some margin -->
-            <div class="grid-stack grid-stack-item grid-stack-main" data-gs-x="2" data-gs-y="0" data-gs-width="8" data-gs-height="8" data-gs-locked="true" data-gs-no-move="true" data-gs-no-resize="true">
+        <div id='outer'>
+            <div id='inner' class="grid-stack grid-stack-main" data-gs-x="0" data-gs-y="0" data-gs-width="12" data-gs-height="12" data-gs-locked="true" data-gs-no-move="true" data-gs-no-resize="true">
                 <!-- Calendar -->
                 <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">
                     <div class="grid-stack-item-content">
@@ -87,12 +86,13 @@
                 <!-- Buton chart.php -->
                 <div class="grid-stack-item" data-gs-x="8" data-gs-y="2" data-gs-width="2" data-gs-height="1">
                     <div class="grid-stack-item-content grid-stack-item-1">
-                        <a href="chart.php" alt="TempHumiChart Page"><img class="icon buttonIcon" src="src/TempHumiChartBtnIcon.png" /></a>
+                        <a href="tempHumiChart.php" alt="TempHumiChart Page"><img class="icon buttonIcon" src="src/TempHumiChartBtnIcon.png" /></a>
                     </div>
                 </div>
-                <!-- Buton 2 -->
+                <!-- Buton CatChart -->
                 <div class="grid-stack-item" data-gs-x="10" data-gs-y="2" data-gs-width="2" data-gs-height="1">
                     <div class="grid-stack-item-content grid-stack-item-2">
+                        <a href="catChart.php" alt="CatChart Page"><img class="icon buttonIcon" src="src/CatChartBtnIcon.png" /></a>
                     </div>
                 </div>
                 <!-- Buton 3 -->
@@ -107,12 +107,13 @@
                     </div>
                 </div>
                 <!-- TemHumiChart -->
-                <div class="grid-stack-item" data-gs-x="0" data-gs-y="4" data-gs-width="6" data-gs-height="2">
+                <div class="grid-stack-item" data-gs-x="0" data-gs-y="4" data-gs-width="6" data-gs-height="3">
                     <div class="grid-stack-item-content grid-stack-item-5">
+                        <canvas id="tempHumiChart"></canvas>
                     </div>
                 </div>
                 <!-- FoodWaterChart -->
-                <div class="grid-stack-item" data-gs-x="6" data-gs-y="4" data-gs-width="6" data-gs-height="2">
+                <div class="grid-stack-item" data-gs-x="6" data-gs-y="4" data-gs-width="6" data-gs-height="3">
                     <div class="grid-stack-item-content grid-stack-item-6">
                     </div>
                 </div>
@@ -185,6 +186,131 @@
                             maxFontSize: '40px'
                         });
                     });
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript" src="js/papaparse.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+    <script>
+        var json = null;
+        var finalList = [];
+        var data = {};
+        var options = {};
+        var ctx = $("#tempHumiChart");
+
+        window.onload = function() {
+            window.myChart = new Chart(ctx, {
+                type: 'line',
+                data: data,
+                options: options
+            });
+            $("#tempHumChart").css("display", "inline-block");
+        }
+
+        var url = "data.php";
+        $.get(url, {
+            oneday: true,
+            t: new Date().getTime()
+        }, function(result) {
+
+            //console.log(result);
+            Papa.parse(result, {
+                //download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(result) {
+                    //console.log(result);
+                    var tempList = [];
+                    var humList = []
+                    var timeList = []
+
+                    var step = result.data.length >= 30 ? (result.data.length / 20 | 0) : 1;
+                    console.log(step);
+                    var counter = step;
+                    // loop over json object
+                    for (var key in result.data) {
+                        if (result.data.hasOwnProperty(key)) {
+                            if (counter == step) {
+                                counter = 0;
+                                // extract data
+                                time = result.data[key].DateTime.split(" ")[1];
+                                temp = result.data[key].Temp;
+                                hum = result.data[key].Hum;
+
+                                timeList.push(time);
+                                tempList.push(temp);
+                                humList.push(hum);
+                            }
+                            counter++;
+                        }
+                    }
+
+                    data = {
+                        labels: timeList,
+                        datasets: [{
+                                label: "Temperature",
+                                data: tempList,
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                fill: false
+                            },
+                            {
+                                label: "Humitity",
+                                data: humList,
+                                backgroundColor: 'rgb(99, 132, 255)',
+                                borderColor: 'rgb(99, 132, 255)',
+                                fill: false
+                            }
+                        ]
+                    };
+                    console.log(data);
+                    options = {
+                        responsive: true,
+                        layout: {
+                            padding: {
+                                left: 10,
+                                right: 10,
+                                top: 0,
+                                bottom: 0
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Temperature & Humitity'
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        },
+                        scales: {
+                            xAxes: [{
+                                display: false
+                            }],
+                            yAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: false,
+                                    labelString: 'Value'
+                                }
+                            }]
+                        }
+                    };
+
+                    window.myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: data,
+                        options: options
+                    });;
+                }
             });
         });
 

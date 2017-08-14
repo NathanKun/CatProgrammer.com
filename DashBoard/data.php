@@ -21,7 +21,7 @@ if ($conn->connect_error) {
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum where (
                     dateandtime >=  '". date("Y-m-d") . "' and dateandtime < '" . (new DateTime('tomorrow'))->format('Y-m-d') .
                 "');";
-    }else{
+    }else{ // 1000 data
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM (
                     SELECT * FROM temphum 
                     ORDER BY dateandtime DESC LIMIT 1000) as latest

@@ -22,15 +22,15 @@
             <h4 id="hint">
                 <?php echo $hint; ?>
             </h4>
-            <div class="input">
-                <label>账号：</label>
-                <label>密码：</label>
-            </div>
-            <div class="input">
+            <div>
+                <label for="id">账号：</label>
                 <input type="text" id="id" name="id" value="<?php echo $id;?>" required />
+            </div>
+            <div>
+                <label for="pw">密码：</label>
                 <input type="password" id="pw" name="pw" value="<?php echo $pw;?>" required />
             </div>
-            <div class="button">
+            <div>
                 <input type="submit" value="登陆" />
             </div>
             <div class="link">

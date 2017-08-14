@@ -17,8 +17,12 @@
     --color2: #BA68C8;
     --color3: #90A4AE;
     --color4: #4FC3F7;
-    --color5: #E57373;
-    --color6: #FFF176;
+    --color5: #B3E5FC;
+    --color6: #FFF9C4;
+}
+
+#inner {
+    width: 90%;
 }
 
 h1 {
