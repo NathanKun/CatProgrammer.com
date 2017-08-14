@@ -95,9 +95,10 @@
                         <a href="catChart.php" alt="CatChart Page"><img class="icon buttonIcon" src="src/CatChartBtnIcon.png" /></a>
                     </div>
                 </div>
-                <!-- Buton 3 -->
+                <!-- Buton Refresh -->
                 <div class="grid-stack-item" data-gs-x="8" data-gs-y="3" data-gs-width="2" data-gs-height="1">
                     <div class="grid-stack-item-content grid-stack-item-3">
+                        <a href="#" alt="refresh"><img class="icon buttonIcon" src="src/refresBtnIcon.png" onclick="loadData1();loadData2();" /></a>
                     </div>
                 </div>
                 <!-- Buton Disconnect.php -->
@@ -130,6 +131,8 @@
     <script src="js/jquery.fittext.js"></script>
     <script src="js/gridstack.js"></script>
     <script src="js/gridstack.jQueryUI.js"></script>
+    <script type="text/javascript" src="js/papaparse.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 
     <script type="text/javascript">
         $(function() {
@@ -139,6 +142,10 @@
             };
             $('.grid-stack').gridstack(options);
 
+            loadData1();
+        });
+
+        function loadData1() {
             $.get("data.php", {
                 single: true
             }, function(result) {
@@ -170,7 +177,7 @@
                         return hrs + ' hours ' + mins + ' minutes ' + secs + ' seconds ago';
                     }
                 }
-
+                $("#temp, #humi, #cal, #food, #water").empty();
                 $("#temp").wrapInner("<p id='tempValue' class='pWhite dataP'>" + list[1] + "</p><p id='tempTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#humi").wrapInner("<p id='humiValue' class='pWhite dataP'>" + list[2] + "</p><p id='humiTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#cal").wrapInner("<p id='calendarDate'>" + date + "</p><p id='calendarDate'>" + time + "</p>");
@@ -187,12 +194,10 @@
                         });
                     });
             });
-        });
+        }
 
     </script>
 
-    <script type="text/javascript" src="js/papaparse.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
     <script>
         var json = null;
         var finalList = [];
@@ -200,119 +205,115 @@
         var options = {};
         var ctx = $("#tempHumiChart");
 
-        window.onload = function() {
-            window.myChart = new Chart(ctx, {
-                type: 'line',
-                data: data,
-                options: options
-            });
-            $("#tempHumChart").css("display", "inline-block");
-        }
-
-        var url = "data.php";
-        $.get(url, {
-            oneday: true,
-            t: new Date().getTime()
-        }, function(result) {
-
-            //console.log(result);
-            Papa.parse(result, {
-                //download: true,
-                header: true,
-                skipEmptyLines: true,
-                complete: function(result) {
-                    //console.log(result);
-                    var tempList = [];
-                    var humList = []
-                    var timeList = []
-
-                    var step = result.data.length >= 30 ? (result.data.length / 20 | 0) : 1;
-                    console.log(step);
-                    var counter = step;
-                    // loop over json object
-                    for (var key in result.data) {
-                        if (result.data.hasOwnProperty(key)) {
-                            if (counter == step) {
-                                counter = 0;
-                                // extract data
-                                time = result.data[key].DateTime.split(" ")[1];
-                                temp = result.data[key].Temp;
-                                hum = result.data[key].Hum;
-
-                                timeList.push(time);
-                                tempList.push(temp);
-                                humList.push(hum);
-                            }
-                            counter++;
-                        }
-                    }
-
-                    data = {
-                        labels: timeList,
-                        datasets: [{
-                                label: "Temperature",
-                                data: tempList,
-                                backgroundColor: 'rgb(255, 99, 132)',
-                                borderColor: 'rgb(255, 99, 132)',
-                                fill: false
-                            },
-                            {
-                                label: "Humitity",
-                                data: humList,
-                                backgroundColor: 'rgb(99, 132, 255)',
-                                borderColor: 'rgb(99, 132, 255)',
-                                fill: false
-                            }
-                        ]
-                    };
-                    console.log(data);
-                    options = {
-                        responsive: true,
-                        layout: {
-                            padding: {
-                                left: 10,
-                                right: 10,
-                                top: 0,
-                                bottom: 0
-                            }
-                        },
-                        title: {
-                            display: true,
-                            text: 'Temperature & Humitity'
-                        },
-                        legend: {
-                            display: false
-                        },
-                        tooltips: {
-                            mode: 'index',
-                            intersect: false,
-                        },
-                        hover: {
-                            mode: 'nearest',
-                            intersect: true
-                        },
-                        scales: {
-                            xAxes: [{
-                                display: false
-                            }],
-                            yAxes: [{
-                                display: true,
-                                scaleLabel: {
-                                    display: false,
-                                    labelString: 'Value'
-                                }
-                            }]
-                        }
-                    };
-
-                    window.myChart = new Chart(ctx, {
-                        type: 'line',
-                        data: data,
-                        options: options
-                    });;
-                }
-            });
+        $(function() {
+            loadData2();
         });
+
+        function loadData2() {
+            $.get("data.php", {
+                oneday: true,
+                t: new Date().getTime()
+            }, function(result) {
+
+                //console.log(result);
+                Papa.parse(result, {
+                    //download: true,
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(result) {
+                        //console.log(result);
+                        var tempList = [];
+                        var humList = []
+                        var timeList = []
+
+                        var step = result.data.length >= 30 ? (result.data.length / 20 | 0) : 1;
+                        //console.log(step);
+                        var counter = step;
+                        // loop over json object
+                        for (var key in result.data) {
+                            if (result.data.hasOwnProperty(key)) {
+                                if (counter == step) {
+                                    counter = 0;
+                                    // extract data
+                                    time = result.data[key].DateTime.split(" ")[1];
+                                    temp = result.data[key].Temp;
+                                    hum = result.data[key].Hum;
+
+                                    timeList.push(time);
+                                    tempList.push(temp);
+                                    humList.push(hum);
+                                }
+                                counter++;
+                            }
+                        }
+
+                        data = {
+                            labels: timeList,
+                            datasets: [{
+                                    label: "Temperature",
+                                    data: tempList,
+                                    backgroundColor: 'rgb(255, 99, 132)',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    fill: false
+                                },
+                                {
+                                    label: "Humitity",
+                                    data: humList,
+                                    backgroundColor: 'rgb(99, 132, 255)',
+                                    borderColor: 'rgb(99, 132, 255)',
+                                    fill: false
+                                }
+                            ]
+                        };
+                        //console.log(data);
+                        options = {
+                            responsive: true,
+                            layout: {
+                                padding: {
+                                    left: 10,
+                                    right: 10,
+                                    top: 0,
+                                    bottom: 0
+                                }
+                            },
+                            title: {
+                                display: true,
+                                text: 'Temperature & Humitity'
+                            },
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: false
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: false,
+                                        labelString: 'Value'
+                                    }
+                                }]
+                            }
+                        };
+
+                        window.myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: data,
+                            options: options
+                        });;
+                    }
+                });
+            });
+        }
 
     </script>
 
