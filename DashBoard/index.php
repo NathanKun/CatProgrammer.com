@@ -9,12 +9,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="index">
-    <meta name="description" content="Temperature and humitity chart of some place">
+    <meta name="description" content="Dashboard of somewhere">
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
-    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>DashBoard</title>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack.min.css" />
     <link rel="stylesheet" href="css/index.css" />
@@ -127,6 +126,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
     <script src="js/gridstack.js"></script>
     <script src="js/gridstack.jQueryUI.js"></script>
 
@@ -170,13 +170,21 @@
                     }
                 }
 
-                $("#temp").wrapInner("<p class='dataP'>" + list[1] + "</p><p class='timeP'>" + msToTime(dt - dtData) + "</p>");
-                $("#humi").wrapInner("<p class='dataP'>" + list[2] + "</p><p class='timeP'>" + msToTime(dt - dtData) + "</p>");
-                $("#cal").wrapInner("<p>" + date + "</p><p>" + time + "</p>");
-                
-                
-                $("#food").wrapInner("<p class='dataP'>100%</p><p class='timeP'>1s ago</p>");
-                $("#water").wrapInner("<p class='dataP'>100%</p><p class='timeP'>1s ago</p>");
+                $("#temp").wrapInner("<p id='tempValue' class='pWhite dataP'>" + list[1] + "</p><p id='tempTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
+                $("#humi").wrapInner("<p id='humiValue' class='pWhite dataP'>" + list[2] + "</p><p id='humiTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
+                $("#cal").wrapInner("<p id='calendarDate'>" + date + "</p><p id='calendarDate'>" + time + "</p>");
+
+                $("#food").wrapInner("<p id='foodValue' class='pWhite dataP'>100%</p><p id='foodTime' class='pWhite timeP'>1s ago</p>");
+                $("#water").wrapInner("<p id='waterValue' class='pWhite dataP'>100%</p><p id='waterTime' class='pWhite timeP'>1s ago</p>");
+
+                // fitText.js
+                $("#tempValue, #humiValue, #foodValue, #waterValue").each(
+                    function() {
+                        $(this).fitText(0.8, {
+                            maxFontSize: '55px',
+                            maxFontSize: '40px'
+                        });
+                    });
             });
         });
 

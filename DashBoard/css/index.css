@@ -74,15 +74,20 @@ body {
 
 
 /* font size */
-
-.dataP {
+/* Use fitText.js to replace css now */
+/*.dataP {
     font-size: 4vw;
+    margin: 0;
+    color: var(--fontWhite);
+}*/
+
+.timeP {
+    font-size: 1.25vw;
     margin: 0;
     color: var(--fontWhite);
 }
 
-.timeP {
-    font-size: 1.25vw;
+.pWhite {
     margin: 0;
     color: var(--fontWhite);
 }
@@ -91,10 +96,11 @@ body {
     font-size: 2.5vw;
     margin: 0;
 }
-
+*/
 
 /* max font size */
-
+/* Use fitText.js to replace css now */
+/*
 @media screen and (min-width: 1200px) {
     .dataP {
         font-size: 48px;
@@ -102,21 +108,21 @@ body {
     .timeP {
         font-size: 15px;
     }
-}
+}*/
 
 
 /* one column mode font size */
 
-.grid-stack.grid-stack-one-column-mode>.grid-stack-item>.grid-stack-item-content>.content-down>div>.dataP {
-    font-size: 4vh!important;
-}
-
-.grid-stack.grid-stack-one-column-mode>.grid-stack-item>.grid-stack-item-content>.content-down>div>.timeP {
+.grid-stack.grid-stack-one-column-mode>.grid-stack-item>.grid-stack-item-content>.content-down>.dataDiv>.timeP {
     font-size: 1.5vh!important;
 }
 
+.grid-stack.grid-stack-one-column-mode>.grid-stack-item>.grid-stack-item-content>.content-down>.dataDiv>.dataP {
+    font-size: 3.5vh!important;
+}
+
 .grid-stack.grid-stack-one-column-mode>.grid-stack-item>.grid-stack-item-content>.content-down>#cal>p {
-    font-size: 3vh!important;
+    font-size: 2.5vh!important;
 }
 
 @media screen and (max-width: 768px) {
