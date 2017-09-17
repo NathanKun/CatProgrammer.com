@@ -1,7 +1,88 @@
+body {
+	font: normal 100% Helvetica, Arial, sans-serif;
+	background: #263238;
+}
+
+.text-box{
+	background: #546E7A;
+	border: 0;
+	height: 2em;
+	width: 15em;
+}
+
+.submit-btn {
+    display: inline-block;
+	background: #546E7A;
+	border: 0;
+	height: 4em;
+	width: 6em;
+}
+
+.inputs{
+    display: inline-block;
+	vertical-align: middle;
+	margin: 1em;
+}
+
+label {
+    display: inline-block;
+    vertical-align: text-top;
+    padding: 0.4em;
+    margin: 0.25em;
+}
+
+.wrapper{
+    margin-top: 0em;
+}
+.text-url{
+    font-size: 6vw;
+    font-weight: bold;
+    text-transform: uppercase;
+    fill: none;
+    stroke-width: 0.025em;
+    stroke-dasharray: 90 310;
+    animation: stroke 6s infinite linear;
+}
+.text-cat{
+    font-size: 32vw;
+    font-weight: bold;
+    text-transform: uppercase;
+    fill: none;
+    stroke-width: 0.015em;
+    stroke-dasharray: 90 310;
+    animation: stroke 6s infinite linear;
+}
+.text-1{
+    stroke: #3498db;
+    text-shadow: 0 0 0.4em #3498db;
+    animation-delay: -1.5s;
+}
+.text-2{
+    stroke: #f39c12;
+    text-shadow: 0 0 0.4em #f39c12;
+    animation-delay: -3s;
+}
+.text-3{
+    stroke: #e74c3c;
+    text-shadow: 0 0 0.4em #e74c3c;
+    animation-delay: -4.5s;
+}
+.text-4{
+    stroke: #9b59b6;
+    text-shadow: 0 0 0.4em #9b59b6;
+    animation-delay: -6s;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: -400;
+  }
+}
+
 section {
     display: block;
-    padding: 3px;
-    margin: 3px;
+    padding: 0.25em;
+    margin: 0.25em;
     text-align: center;
     vertical-align: text-top;
 }
@@ -11,26 +92,14 @@ section {
     display: block;
 }
 
-label {
-    display: inline-block;
-    vertical-align: text-top;
-    padding: 5px;
-    margin: 3px;
-}
-
 input {
     display: inline-block;
     vertical-align: text-top;
-    padding: 5px;
-    margin: 3px;
+    padding: 0.4em;
+    margin: 0.25em;
     width: 15em;
 }
 
 footer {
     text-align: center;
-}
-
-body {
-    color: #024457;
-    background: #f2f2f2;
 }
