@@ -17,6 +17,8 @@ if ($conn->connect_error) {
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum;";
     }else if (isset($_GET['single'])) {
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum ORDER BY dateandtime DESC LIMIT 1;";
+    }else if (isset($_GET['single_food_water'])) {
+        $sql = "SELECT dateandtime AS DateTime, foodpct AS Food, waterPCT AS water FROM foodwater ORDER BY dateandtime DESC LIMIT 1;";
     }else if (isset($_GET['oneday'])) {
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum where (
                     dateandtime >=  '". date("Y-m-d") . "' and dateandtime < '" . (new DateTime('tomorrow'))->format('Y-m-d') .

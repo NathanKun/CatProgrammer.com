@@ -145,6 +145,20 @@
             loadData1();
         });
 
+        function msToTime(s) {
+            s = s / 1000;
+            var secs = s % 60;
+            s = (s - secs) / 60;
+            var mins = s % 60;
+            var hrs = (s - mins) / 60;
+
+            if (hrs == 0) {
+                return mins + ' minutes ' + secs + ' seconds ago';
+            } else {
+                return hrs + ' hours ' + mins + ' minutes ' + secs + ' seconds ago';
+            }
+        }
+
         function loadData1() {
             $.get("data.php", {
                 single: true
@@ -163,30 +177,47 @@
                 dtData.setHours(list[0].substr(11, 2));
                 dtData.setMinutes(list[0].substr(14, 2));
                 dtData.setSeconds(list[0].substr(17, 2));
-
-                function msToTime(s) {
-                    s = s / 1000;
-                    var secs = s % 60;
-                    s = (s - secs) / 60;
-                    var mins = s % 60;
-                    var hrs = (s - mins) / 60;
-
-                    if (hrs == 0) {
-                        return mins + ' minutes ' + secs + ' seconds ago';
-                    } else {
-                        return hrs + ' hours ' + mins + ' minutes ' + secs + ' seconds ago';
-                    }
-                }
-                $("#temp, #humi, #cal, #food, #water").empty();
+                $("#temp, #humi, #cal").empty();
                 $("#temp").wrapInner("<p id='tempValue' class='pWhite dataP'>" + list[1] + "</p><p id='tempTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#humi").wrapInner("<p id='humiValue' class='pWhite dataP'>" + list[2] + "</p><p id='humiTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
                 $("#cal").wrapInner("<p id='calendarDate'>" + date + "</p><p id='calendarDate'>" + time + "</p>");
 
-                $("#food").wrapInner("<p id='foodValue' class='pWhite dataP'>100%</p><p id='foodTime' class='pWhite timeP'>1s ago</p>");
-                $("#water").wrapInner("<p id='waterValue' class='pWhite dataP'>100%</p><p id='waterTime' class='pWhite timeP'>1s ago</p>");
 
                 // fitText.js
-                $("#tempValue, #humiValue, #foodValue, #waterValue").each(
+                $("#tempValue, #humiValue").each(
+                    function() {
+                        $(this).fitText(0.8, {
+                            maxFontSize: '55px',
+                            maxFontSize: '40px'
+                        });
+                    });
+            });
+            
+            
+            $.get("data.php", {
+                single_food_water: true
+            }, function(result) {
+                result = result.replace(/"/g, ""); // js replace only replace the first caractor, use g for global
+                var list = result.split(';');
+
+                var dt = new Date($.now());
+                var date = dt.getFullYear() + "-" + dt.getMonth() + "-" + dt.getDay();
+                var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+
+                var dtData = new Date();
+                dtData.setFullYear(list[0].substr(0, 4));
+                dtData.setMonth(parseInt(list[0].substr(5, 2)) - 1);
+                dtData.setDate(list[0].substr(8, 2));
+                dtData.setHours(list[0].substr(11, 2));
+                dtData.setMinutes(list[0].substr(14, 2));
+                dtData.setSeconds(list[0].substr(17, 2));
+                
+                $("#food, #water").empty();
+                $("#food").wrapInner("<p id='foodValue' class='pWhite dataP'>" + list[1] + "</p><p id='foodTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
+                $("#water").wrapInner("<p id='waterValue' class='pWhite dataP'>" + list[2] + "</p><p id='waterTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
+                
+                // fitText.js
+                $("#foodValue, #waterValue").each(
                     function() {
                         $(this).fitText(0.8, {
                             maxFontSize: '55px',
