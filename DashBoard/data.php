@@ -35,7 +35,7 @@ if ($conn->connect_error) {
     $conn->close();
     if($result->num_rows == 0){
         echo 'failed';
-    } else if (isset($_GET['single'])) {
+    } else if (isset($_GET['single']) || isset($_GET['single_food_water'])) {
         $row = $result->fetch_row();
         foreach( $row as $value )
         {                                            
