@@ -7,11 +7,12 @@ $food = ( isset ( $_GET["f"] ) ) ? trim ( $_GET["f"] ) : '';
 $water = ( isset ( $_GET["w"] ) ) ? trim ( $_GET["w"] ) : '';
 $foodpct = ( isset ( $_GET["fp"] ) ) ? trim ( $_GET["fp"] ) : '';
 $waterpct = ( isset ( $_GET["wp"] ) ) ? trim ( $_GET["wp"] ) : '';
+$isfed = ( isset ( $_GET["isfed"] ) ) ? trim ( $_GET["isfed"] ) : '';
 
 require_once "../config.php";
 require_once (ROOT_DIR.'/includes/param.inc.php');
 
-if(($dateandtime != '' && $temp != '' && $hum != '') || ($food != '' && $water != '' && $foodpct != '' && $waterpct != '')){
+if(($dateandtime != '' && $temp != '' && $hum != '') || ($food != '' && $water != '' && $foodpct != '' && $waterpct != '' && $isfed != '')){
     $conn = new mysqli($host, $user, $dbpw, $db);
 
     if ($conn->connect_error) {
@@ -29,8 +30,9 @@ if(($dateandtime != '' && $temp != '' && $hum != '') || ($food != '' && $water !
             $water =  $conn->real_escape_string(urldecode($water));
             $foodpct =  $conn->real_escape_string(urldecode($foodpct));
             $waterpct =  $conn->real_escape_string(urldecode($waterpct));
+            $isfed =  $conn->real_escape_string(urldecode($isfed));
 
-            $sql = "INSERT INTO foodwater(food, foodpct, water, waterpct) VALUES('$food', '$foodpct', '$water', '$waterpct')";
+            $sql = "INSERT INTO foodwater(food, foodpct, isfed, water, waterpct) VALUES('$food', '$foodpct', '$isfed' '$water', '$waterpct')";
         }
 	//echo $sql;
         if($conn->query($sql) === true){
