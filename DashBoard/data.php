@@ -23,6 +23,8 @@ if ($conn->connect_error) {
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM temphum where (
                     dateandtime >=  '". date("Y-m-d") . "' and dateandtime < '" . (new DateTime('tomorrow'))->format('Y-m-d') .
                 "');";
+    }else if (isset($_GET['lastfed'])) {
+        $sql = "SELECT dateandtime AS DateTime FROM foodwater where isfed = 1 ORDER BY dateandtime DESC LIMIT 1;";
     }else{ // 1000 data
         $sql = "SELECT dateandtime AS DateTime, temp AS Temp, hum AS Hum FROM (
                     SELECT * FROM temphum 
@@ -51,7 +53,10 @@ if ($conn->connect_error) {
             $line .= $value;
         }
         echo $line;
-    } else{
+    } else if (isset($_GET['lastfed']) {
+    	$row = $result->fetch_row();
+    	echo $row[0];
+    }else{
         $fields = $result->field_count;       
         for ( $i = 0; $i < $fields; $i++ )
         {

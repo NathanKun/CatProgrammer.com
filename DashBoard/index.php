@@ -212,8 +212,13 @@
                 dtData.setMinutes(list[0].substr(14, 2));
                 dtData.setSeconds(list[0].substr(17, 2));
                 
+                var lastFedTime = null;
+                $.get("data.php", {lastFed: true}), function(result) { lastFedTime = result; };
+                console.log(lastFedTime);
+                
                 $("#food, #water").empty();
-                $("#food").wrapInner("<p id='foodValue' class='pWhite dataP'>" + list[1] + "%</p><p id='foodTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
+                $("#food").wrapInner("<p id='foodValue' class='pWhite dataP'>" + list[1] + "%</p><p id='foodTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>" + 
+                                     "<p id='lastFed' class='pWhite timeP'>" + lastFedTime);
                 $("#water").wrapInner("<p id='waterValue' class='pWhite dataP'>" + list[2] + "%</p><p id='waterTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
                 
                 // fitText.js
