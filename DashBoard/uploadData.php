@@ -32,7 +32,7 @@ if(($dateandtime != '' && $temp != '' && $hum != '') || ($food != '' && $water !
             $waterpct =  $conn->real_escape_string(urldecode($waterpct));
             $isfed =  $conn->real_escape_string(urldecode($isfed));
 
-            $sql = "INSERT INTO foodwater(food, foodpct, isfed, water, waterpct) VALUES('$food', '$foodpct', '$isfed' '$water', '$waterpct')";
+            $sql = "INSERT INTO foodwater(food, foodpct, isfed, water, waterpct) VALUES('$food', '$foodpct', '$isfed', '$water', '$waterpct')";
         }
 	//echo $sql;
         if($conn->query($sql) === true){
