@@ -53,7 +53,7 @@ if ($conn->connect_error) {
             $line .= $value;
         }
         echo $line;
-    } else if (isset($_GET['lastfed']) {
+    } else if (isset($_GET['lastfed'])) {
     	$row = $result->fetch_row();
     	echo $row[0];
     }else{
