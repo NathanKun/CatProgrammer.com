@@ -151,7 +151,7 @@
             s = (s - secs) / 60;
             var mins = s % 60;
             var hrs = (s - mins) / 60;
-
+            secs = Math.round(secs);
             if (hrs == 0) {
                 return mins + ' minutes ' + secs + ' seconds ago';
             } else {
@@ -212,24 +212,31 @@
                 dtData.setMinutes(list[0].substr(14, 2));
                 dtData.setSeconds(list[0].substr(17, 2));
                 
-                var lastFedTime = null;
-                $.get("data.php", {lastFed: true}), function(result) { lastFedTime = result; };
-                console.log(lastFedTime);
-                
-                $("#food, #water").empty();
-                $("#food").wrapInner("<p id='foodValue' class='pWhite dataP'>" + list[1] + "%</p><p id='foodTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>" + 
-                                     "<p id='lastFed' class='pWhite timeP'>" + lastFedTime);
-                $("#water").wrapInner("<p id='waterValue' class='pWhite dataP'>" + list[2] + "%</p><p id='waterTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
-                
-                // fitText.js
-                $("#foodValue, #waterValue").each(
-                    function() {
-                        $(this).fitText(0.8, {
-                            maxFontSize: '55px',
-                            maxFontSize: '40px'
+                $.get("data.php", {lastfed: true}, function(result) {
+                    var lastFedTime = result;
+                    var dtLastFed = new Date();
+                    dtLastFed.setFullYear(lastFedTime.substr(0, 4));
+                    dtLastFed.setMonth(parseInt(lastFedTime.substr(5, 2)) - 1);
+                    dtLastFed.setDate(lastFedTime.substr(8, 2));
+                    dtLastFed.setHours(lastFedTime.substr(11, 2));
+                    dtLastFed.setMinutes(lastFedTime.substr(14, 2));
+                    dtLastFed.setSeconds(lastFedTime.substr(17, 2));
+
+                    $("#food, #water").empty();
+                    $("#food").wrapInner("<p id='foodValue' class='pWhite dataP'>" + list[1] + "%</p><p id='foodTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>" +
+                        "<p id='lastFed' class='pWhite timeP'>Last fed: " + msToTime(dt - dtLastFed));
+                    $("#water").wrapInner("<p id='waterValue' class='pWhite dataP'>" + list[2] + "%</p><p id='waterTime' class='pWhite timeP'>" + msToTime(dt - dtData) + "</p>");
+
+                    // fitText.js
+                    $("#foodValue, #waterValue").each(
+                        function() {
+                            $(this).fitText(0.8, {
+                                maxFontSize: '55px',
+                                maxFontSize: '40px'
+                            });
                         });
                     });
-            });
+                });
         }
 
     </script>
