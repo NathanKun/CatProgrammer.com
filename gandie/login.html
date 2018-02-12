@@ -1,0 +1,38 @@
+﻿<!doctype html>
+<html>
+
+<head>
+    <meta charset = "utf8">  
+	  <meta http-equiv="Cache-Control" content="no-cache" >
+	  <meta http-equiv="Pragma" content="no-cache" >
+    <meta http-equiv="Expires" content="-1" >
+    <link rel=stylesheet type=text/css href="./login.css">
+    <title> Login page :) </title>
+</head>
+<body>
+
+  <div id="div_title">
+      <span id="title"> Welcome to wentong's website! </span>
+      </br>
+      <a href="{{ url_for('homepage') }}" id="guestlink">Entrance for guests here :)</a>
+  </div>
+
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  
+  <form action="{{ url_for('login') }}" method="post">
+      <div id = "div_login">
+          <span class="label">Username:</span>
+          <input class="input" type="text" name="username">
+          <br/>
+          <span class="label">Password: </span>
+          <input class="input" type="password" name="password">
+          <br/>
+          <input class="input" type="text" name="redirect" value="{{redirect}}" style="display:none;">
+          <br/>
+          <input id="submit" type="submit" value="Login" >
+      </div>
+  </form>
+</body>
+</html>

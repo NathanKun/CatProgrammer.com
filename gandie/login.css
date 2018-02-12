@@ -1,0 +1,102 @@
+﻿@media (min-width: 981px) {
+	body {
+		/* Location of the image */
+		background-image: url(./aurora.jpg);
+
+		/* Background image is centered vertically and horizontally at all times */
+		background-position: center center;
+
+		/* Background image doesn't tile */
+		background-repeat: no-repeat;
+
+		/* Background image is fixed in the viewport so that it doesn't move when
+           the content's height is greater than the image's height */
+		background-attachment: fixed;
+
+		/* This is what makes the background image rescale based
+           on the container's size */
+		background-size: cover;
+
+		/* Set a background color that will be displayed
+           while the background image is loading */
+		background-color: #FF6600;
+	}
+}
+
+@media (max-width: 980px){
+	body {
+		background-image: url(./birds.jpg);
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		background-color: #464646;
+	}
+}
+
+@font-face {
+    font-family: 'KGLifeisMessy'; 
+    src: url(../fonts/KGLifeisMessy.ttf) format('truetype');
+}
+
+#div_title {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top:25%;
+	font-family: KGLifeisMessy;
+}
+
+#guestlink {
+	font-size: 25px;
+	color: #ccc;
+}
+
+#title {
+	font-size: 50px;
+	color: #ff6600;
+}
+
+#div_login {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 50%;
+	font-family: KGLifeisMessy;
+	font-size: 25px;
+	color: #ff6600;
+}
+
+.flash {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	top: 43%;
+	font-family: KGLifeisMessy;
+	font-size: 25px;
+	color: red;
+}
+
+.input {
+	background: transparent;
+	font-size: 25px;
+	font-family: KGLifeisMessy;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+	border: 5px solid #ccc;
+	border-radius: 10px;
+}
+
+.input:focus {
+	background: none;
+	background-color: lightblue;
+	border: 5px solid #ff6600;
+}
+
+
+@media (min-width: 981px) {
+	#submit {
+	   display: none;
+	}
+}
+
