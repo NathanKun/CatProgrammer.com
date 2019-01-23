@@ -13,11 +13,6 @@
 </head>
 
 <body>
-    <?php 
-        //include('./includes/header.inc.php');
-        include('./includes/login.inc.php');
-    ?>
-	
 	<header>
 		<div class="wrapper">
 			<svg width="100%" height="35vw">
@@ -52,24 +47,6 @@
 	</header>
 
     <section>
-        <form name="login_input" method="post" action="<?php echo htmlspecialchars($_SERVER[ 'PHP_SELF' ]);?>">
-            <h4 id="hint">
-                <?php echo $hint; ?>
-            </h4>
-			<div class="inputs">
-				<div>
-					<label for="id">账号：</label>
-					<input class="text-box" type="text" id="id" name="id" value="<?php echo $id;?>" required />
-				</div>
-				<div>
-					<label for="pw">密码：</label>
-					<input class="text-box" type="password" id="pw" name="pw" value="<?php echo $pw;?>" required />
-				</div>
-			</div>
-            <div class="inputs">
-                <input class="submit-btn" type="submit" value="登陆" />
-            </div>
-        </form>
     </section>
     <?php include('./includes/footer.inc.php'); ?>
 </body>
